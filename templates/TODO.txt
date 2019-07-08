@@ -1,0 +1,25 @@
+TODO 
+
+1. create setup form:
+    username, email, password
+    -figure out css template/html formatting
+        -setup 
+
+2. create profile form:
+    -add phone number -DONE
+    -add zip code - DONE
+    -cell phone carrier? - DONE
+
+    -create alerts, on/off option - DONE, not tested
+        -rain, time period, frequency - DONE
+    
+    -STMP vs. firebase? -> google messaging service
+
+3. setup password reset
+4. setup profile edit page - DONE
+5. setup Alert Update, Delete pages
+6. Profile/Account Delete
+7. Setup nav bar - DONE
+8. OAuth integration
+
+

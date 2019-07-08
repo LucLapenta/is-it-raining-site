@@ -1,0 +1,18 @@
+<!-- templates/home.html -->
+{% extends 'base.html' %}
+{% block body %}
+<div class="container">
+    <h1>Is it going to rain?</h1>
+    <h3>Answering the important weather questions</h3>
+    {% if user.is_authenticated %}
+        <p>Hi {{ user.username }}
+        <p><a href="{% url 'logout' %}">Log out</a></p>
+        <p><a href="{% url 'profile' %}">profile</a></p>
+        <p><a href="{% url 'alerts' %}">alerts</a></p>
+        <p><a href="{% url 'edit_profile' %}">edit profile</a></p>
+    {% else %}
+        <p><a href="{% url 'signup' %}">Sign Up</a></p>
+        <p><a href="{% url 'login' %}">Log In </a></p>
+    {% endif %}
+</div>
+{% endblock body %}

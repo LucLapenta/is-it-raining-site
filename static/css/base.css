@@ -1,0 +1,12 @@
+body
+{
+background-image:url('/static/images/topography.png');
+background-repeat:round;
+}
+
+.container{
+    background-color:white;
+    height:80%;
+    border:1px solid #b0b3b8;
+}
+

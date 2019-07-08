@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+{% block body %}
+
+<div class="container">
+
+ 
+    <h1>Alerts</h1>
+    
+    <div class="table-responsive table-hover">
+
+        <table class="table" id="alert_table" style="text-align: center">
+            <thead class="thead-light">
+                <tr>
+                    <th>Weather Type</th>
+                    <th>Interval</th>
+                    <th>Search Length</th>
+                    <th>Alert Time</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for alert in object_list %}
+                    <tr>
+                        <td>{{alert.weather_type}}</td>
+                        <td>{{alert.interval}}</td>
+                        <td>{{alert.search_length}}</td>
+                        <td>{{alert.alert_time}}</td>
+                    </tr>
+                {% empty %}
+                    <li>No alerts yet.</li>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+  
+    <button>Add</button>
+    <button>Edit</button>
+    <button>Delete</button>
+</div>
+
+
+{% endblock body %}
