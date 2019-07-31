@@ -50,7 +50,7 @@ class Alert(models.Model):
     ]
     
     weather_type = models.CharField(max_length=6, choices=WEATHER_CHOICES, default=RAIN)
-    interval = models.CharField(max_length=4, choices=INTERVAL_CHOICES, default=DAILY)
+    interval = models.CharField(max_length=6, choices=INTERVAL_CHOICES, default=DAILY)
     search_length = models.IntegerField(default=1)
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     active = models.BooleanField(default=False)

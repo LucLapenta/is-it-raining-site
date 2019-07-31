@@ -1,5 +1,5 @@
 from django import forms
-from django.forms import ModelForm
+from django.forms import ModelForm, TimeInput
 from django.contrib.auth.forms import UserCreationForm, UserChangeForm
 from .models import CustomUser, Profile, Alert
 from phonenumber_field.formfields import PhoneNumberField
@@ -29,11 +29,14 @@ class UserProfileForm(UserChangeForm):
 
 class AlertModelForm(ModelForm):
     
-    alert_time = forms.TimeField(input_formats = ( '%I:%M %p', ))
+    #alert_time = forms.TimeField(input_formats = ( '%I:%M %p', ))
 
     class Meta:
         model = Alert
         exclude = ['user']
+        """widgets = {
+            'alert_time': TimeInput(format='%I:%M %p'),
+        }"""
        
     
    

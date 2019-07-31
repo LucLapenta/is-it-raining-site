@@ -7,7 +7,8 @@
         <table>
         {{ form.as_table }}
         </table>
-        <button type="submit">Save changes</button>
+        <button class="btn btn-primary" type="submit">Save changes</button>
+        <a class="btn btn-primary" href="{% url 'delete_alert' alert.pk%}">Delete</a>
     </form>
 </div>
 {% endblock body %}

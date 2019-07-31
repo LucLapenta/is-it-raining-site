@@ -2,13 +2,18 @@
 {% block body %}
 <div class="container">
     {% if user.is_authenticated %}
-        <h1>Your profile:</h1>
-        <p>{{ user.profile.phone_number }}</p>
-        <p>{{ user.profile.zip_code }}</p>
-        <p>{{ user.profile.cell_phone_provider}}</p>
-        <p><a href="{% url 'alert-create' %}">Create new alert</a></p>
-        <p><a href="{% url 'alerts' %}"></a> Your alerts</p>
-        <p><a href="{% url 'edit_profile' %}">Edit profile</a></p>
+    <h2>Your Profile:</h2>
+        <div class="card">
+            <div class="card-body">
+                <p class="card-text">Phone Number: {{ user.profile.phone_number }}</p>
+                <p class="card-text">Zip Code: {{ user.profile.zip_code }}</p>
+                <p class="card-text">Cell Phone Provider: {{ user.profile.cell_phone_provider }}</p>
+                <hr class="style1"></hr>
+                <a href="{% url 'alert-create' %}" class="card-link">Create new alert</a>
+                <a href="{% url 'alerts' %}" class="card-link"> Your Alerts</a>
+                <a href="{% url 'edit_profile' %}" class="card-link">Edit your profile</a>
+            </div>
+        </div>
 
     {% else %}
         <p>please log in to view profile data.</p>
