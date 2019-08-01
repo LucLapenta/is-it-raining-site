@@ -19,10 +19,11 @@ class CustomUserChangeForm(UserChangeForm):
 
     class Meta(UserChangeForm):
         model = CustomUser
-        fields = ('username', 'email', 'first_name', 'last_name')
+        fields = ('email', 'first_name', 'last_name')
     
 class UserProfileForm(UserChangeForm):
-
+    password = None
+    
     class Meta:
         model = Profile
         fields = ('phone_number', 'zip_code', 'cell_phone_provider')

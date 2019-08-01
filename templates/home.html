@@ -5,11 +5,21 @@
     <h1>Is it going to rain?</h1>
     <h3>Answering the important weather questions</h3>
     {% if user.is_authenticated %}
-        <p>Hi {{ user.username }}
-        <p><a href="{% url 'logout' %}">Log out</a></p>
-        <p><a href="{% url 'profile' %}">profile</a></p>
-        <p><a href="{% url 'alerts' %}">alerts</a></p>
-        <p><a href="{% url 'edit_profile' %}">edit profile</a></p>
+        <p>Hi {{ user.username }}</p>
+        {% if user.profile.zip_code == None %}
+            <p>You havent setup your location yet.</p>
+            <p>Add local weather udpate by setting up your location <a href="{% url 'edit_profile' %}">here</a></p>
+        {% else %}
+            <div class="card" style="width: 18rem;">
+                    <img class="card-img-top" src="..." alt="Card image cap">
+                    <div class="card-body">
+                    <h5 class="card-title">Today's Weather</h5>
+                    <p class="card-text">This is where the weather infor will go</p>
+                    <a href="{% url 'alerts' %}" class="btn btn-primary">Go to my alerts</a>
+                    </div>
+            </div>
+        {% endif %}
+        
     {% else %}
         <p><a href="{% url 'signup' %}">Sign Up</a></p>
         <p><a href="{% url 'login' %}">Log In </a></p>

@@ -130,28 +130,3 @@ def edit_profile(request):
         'profile_form': profile_form
     })
 
-def create_alert(request, pk=None):
-
-    if pk:
-        user = CustomUser.objects.get(pk=pk)
-    else:
-        user = request.user
-
-    if request.method == 'POST':
-        alert_form = AlertModelForm(request.POST, instance=user)
-
-        if alert_form.is_valid():
-            alert_form.instance.user = user
-            alert_form.save()
-            print(request.POST)
-            messages.success(request, ('Alert created sucessfully'))
-            return redirect('/users/profile')
-        else:
-            messages.error(request, ('invalid field'))
- 
-    else:
-       alert_form = AlertModelForm()
-    
-    return render(request, 'users/alert_form.html', {
-        'alert_form': alert_form,
-        })
