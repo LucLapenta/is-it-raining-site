@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.sites',
     'register',
     'users',
+    'weather',
     'phonenumber_field'
 ]
 
@@ -141,3 +142,7 @@ SITE_ID = 1
 
 ACCOUNT_EMAIL_REQUIRED = True
 ACCOUNT_USERNAME_REQUIRED = False
+
+# use local email storage for password reset
+EMAIL_BACKEND = "django.core.mail.backends.filebased.EmailBackend"
+EMAIL_FILE_PATH = os.path.join(BASE_DIR, "sent_emails")

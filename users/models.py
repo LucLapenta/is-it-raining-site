@@ -42,19 +42,21 @@ class Alert(models.Model):
         (HEAT, 'Heat'),
     ]
 
-    DAILY = 'Daily'
-    WEEKLY = 'Weekly'
+    DAILY = 24
+    TWICE_DAILY = 12
+    THREE_TIMES_DAILY = 8
     INTERVAL_CHOICES = [
-        (DAILY, 'Daily'),
-        (WEEKLY, 'Weekly'),
+        (DAILY, 24),
+        (TWICE_DAILY, 12),
+        (THREE_TIMES_DAILY, 8),
     ]
     
     weather_type = models.CharField(max_length=6, choices=WEATHER_CHOICES, default=RAIN)
-    interval = models.CharField(max_length=6, choices=INTERVAL_CHOICES, default=DAILY)
-    search_length = models.IntegerField(default=1)
+    interval = models.IntegerField(choices=INTERVAL_CHOICES, default=DAILY)
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     active = models.BooleanField(default=False)
     alert_time = models.TimeField(default='05:00 PM')
+
 
 
 @receiver(post_save, sender=CustomUser)

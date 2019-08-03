@@ -18,8 +18,7 @@
             <thead class="thead-light">
                 <tr>
                     <th>Weather Type</th>
-                    <th>Interval</th>
-                    <th>Search Length</th>
+                    <th>Interval (Hours)</th>
                     <th>Alert Time</th>
                 </tr>
             </thead>
@@ -28,7 +27,6 @@
                     <tr>
                         <td><a href="{% url 'edit_alert' alert.pk%}">{{alert.weather_type}}</a></td>
                         <td>{{alert.interval}}</td>
-                        <td>{{alert.search_length}}</td>
                         <td>{{alert.alert_time}}</td>
                     </tr>
                 {% empty %}
