@@ -1,2 +1,5 @@
 /env
 .vscode
+/is_it_raining/secrets.py
+*.pyc
+*.pyo

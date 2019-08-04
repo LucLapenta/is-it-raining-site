@@ -1,17 +1,9 @@
-import json
-import geopy
-import requests
-import pytz
-
-
-from geopy.geocoders import Nominatim
-from timezonefinder import TimezoneFinder
-
 from django.db import models
 from django.db.models.signals import post_save
 from django.dispatch import receiver
 
 from users.models import Profile
+from weather.weather_service import get_weather_location
 
 class WeatherStation(models.Model):
     zip_code = models.CharField(max_length=5, null=True, unique=True)
@@ -22,8 +14,17 @@ class WeatherStation(models.Model):
     grid_x = models.IntegerField()
     grid_y = models.IntegerField()
 
+    def get_forecast_url(self):
+        return 'https://api.weather.gov/gridpoints/'+ str(self.weather_station) + '/' + str(self.grid_x) + ',' + str(self.grid_y) + '/forecast'
+
+
 class Weather(models.Model):
-    zip_code = models.CharField(max_length=5, null=True, unique=True)
+    """ model to store the data recieved from the weather.gov API. 
+
+        typically data will be returned from the API in 8 hour increments.
+        Each model will contain data for the corresponding time window for a given zip code
+    """
+    zip_code = models.CharField(max_length=5, null=True)
     name = models.CharField(max_length=50, null=True)
     start_time=models.TimeField()
     end_time=models.TimeField()
@@ -41,20 +42,6 @@ def create_weather_station(sender, **kwargs):
     zip_code = profile.zip_code
     
     if len(WeatherStation.objects.filter(zip_code=zip_code)) == 0:
-        geolocator = Nominatim(user_agent="is_it_raining_bot")
-        location = geolocator.geocode(zip_code)
-        latitude = location.latitude
-        longitude = location.longitude
-
-        tf = TimezoneFinder()
-        tz = tf.timezone_at(lat=latitude, lng=longitude)
-        timezone = pytz.timezone(tz)
-
-        url = 'https://api.weather.gov/points/'+ str(latitude) + '%2C' + str(longitude)
-        r = requests.get(url)
-
-        location_data = json.loads(r.text)
-        weather_station = location_data['properties']['cwa']
-        grid_x = location_data['properties']['gridX']
-        grid_y = location_data['properties']['gridY']
-        WeatherStation.objects.create(zip_code=zip_code, latitude=latitude, longitude=longitude, timezone=timezone, weather_station=weather_station, grid_x=grid_x, grid_y=grid_y)    
+        
+        new_station = weather_service.get_weather_location(zip_code)
+        WeatherStation.objects.create(**new_station)    
