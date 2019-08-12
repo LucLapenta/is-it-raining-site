@@ -36,6 +36,9 @@ class Weather(models.Model):
     short_forecast=models.TextField()
     detailed_forecast=models.TextField()
 
+    def get_latest(self, zip_code):
+        return Weather.objects.filter(zip_code=zip_code).orderby(-id)[0]
+
 @receiver(post_save, sender=Profile)
 def create_weather_station(sender, **kwargs):
     profile = kwargs['instance']
