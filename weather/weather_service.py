@@ -6,6 +6,10 @@ import pytz
 from geopy.geocoders import Nominatim
 from timezonefinder import TimezoneFinder
 
+request_headers = {
+    'User-Agent': 'is_it_raining_bot_v1'
+}
+
 def get_weather_location(zip_code:str):
     """ function to make API call to weather.gov api to get the weather station for a given zip code.
     """
@@ -29,7 +33,7 @@ def get_weather_location(zip_code:str):
 
         # Make API call to api.weather.gov to find the closest weather station to the lat/long of the zip code.
         url = 'https://api.weather.gov/points/'+ str(latitude) + '%2C' + str(longitude)
-        r = requests.get(url)
+        r = requests.get(url, headers=request_headers)
 
         location_data = json.loads(r.text)
 
@@ -71,7 +75,7 @@ def get_weather(weather_station:str, grid_x:int, grid_y:int):
         url = base_url + str(weather_station) + '/'
         url += str(grid_x) + ',' + str(grid_y) + '/forecast'
 
-        r = requests.get(url)
+        r = requests.get(url, headers=request_headers)
         weather_data = json.loads(r.text)
 
         return weather_data['properties']['periods']

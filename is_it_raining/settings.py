@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'register',
     'users',
     'weather',
+    'alerts',
     'phonenumber_field'
 ]
 

@@ -10,9 +10,16 @@
             <p>You havent setup your location yet.</p>
             <p>Add local weather udpate by setting up your location <a href="{% url 'edit_profile' %}">here</a></p>
         {% else %}
-            {% for item in weather.latest %}
-                {% include "weather_detail.html" with item=item only %}\
-            {% endfor %}
+            {% if latest_weather != None %}
+            <div class="card" style="width: 18rem;">
+                <img class="card-img-top" src="..." alt="Card image cap">
+                <div class="card-body">
+                <h5 class="card-title">{{latest_weather.name}}</h5>
+                <p class="card-text">{{latest_weather.detailed_forecast}}</p>
+                <a href="{% url 'alerts' %}" class="btn btn-primary">Go to my alerts</a>
+                </div>
+            </div>
+            {% endif %}
         {% endif %}
         
     {% else %}

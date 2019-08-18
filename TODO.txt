@@ -1,0 +1,45 @@
+TODO:
+    -setup time validation for time entry -- Done
+    -add errors for update alert form -- DONE
+    -redirect URL for update alert form -- DONE
+
+    -Consider switching to Rest API
+    -set time interval in hours (min=8) -- DONE
+    -Add delete option in edit/detail view -- DONE
+
+    -Advanced option (seasonal profile based on zip code)
+    -script integration w/ apscheduler?
+
+    -setup DB storage for current weather for a given zip code
+            -store table for zip code -> weather station/box coords -- DONE
+            -store table for recent weather -- DONE
+        
+        -update on schedule
+            -find timeperiod to request all new weather information:
+                -need to setup a sceudule to update each zip code
+                    -simple version would be to update info for all zip codes every 2 hours, may need to space out API calls due to rate limits
+                
+        -send message if weather meets condition
+            -need to schedule updates based on user defined alerts.
+            -may need to send many messages out in a batch.
+            -this feature should be moved to a seperate service (could run in background)
+                -does not seem like a good idea to include all of this scheduling/messaging inside of the web application logic
+                -but maybe if it is seperated into the weather app, it is not necessarily part of the actual web app logic...
+    
+
+    zip code reciever:
+        -user sets zip code in profile -- DONE
+        -if zip code is in waeather location data, dont do anything -- DONE
+        -else get long/lat query weather.gov api to get grid_x, grid_y, and cwa -- DONE
+
+
+    -Add reset password view -- DONE
+    -Add sign out button -- DONE
+    
+    -IMPLEMENT UNIT TESTS!!!!!!!!!!!!!!!!!!!!!!!!
+   
+
+    -Move Alerts to seperate app 
+        -setup notification scheduling/messaging
+    
+    -setup python scheduler to run alerts and weather updates in background 

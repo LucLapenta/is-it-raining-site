@@ -36,8 +36,11 @@ class Weather(models.Model):
     short_forecast=models.TextField()
     detailed_forecast=models.TextField()
 
+    #class Meta():
+        #unique_together = ('zip_code', 'start_time')
+
     def get_latest(self, zip_code):
-        return Weather.objects.filter(zip_code=zip_code).orderby(-id)[0]
+        return Weather.objects.filter(zip_code=zip_code).orderby('-id')[0]
 
 @receiver(post_save, sender=Profile)
 def create_weather_station(sender, **kwargs):
@@ -46,5 +49,5 @@ def create_weather_station(sender, **kwargs):
     
     if len(WeatherStation.objects.filter(zip_code=zip_code)) == 0:
         
-        new_station = weather_service.get_weather_location(zip_code)
+        new_station = get_weather_location(zip_code)
         WeatherStation.objects.create(**new_station)    
